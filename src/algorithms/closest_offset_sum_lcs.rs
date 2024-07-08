@@ -1,3 +1,5 @@
+///!Intellectual Property of Wannes Vantorre. Distribution not permitted.
+
 use crate::lcs_trait::Lcs;
 
 #[derive(Debug, Clone, PartialEq)]

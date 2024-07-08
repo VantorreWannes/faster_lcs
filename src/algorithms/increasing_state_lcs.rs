@@ -1,3 +1,5 @@
+///!Intellectual Property of Wannes Vantorre. Distribution not permitted.
+
 use crate::lcs_trait::Lcs;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -16,6 +18,7 @@ impl<'a> IncreasingStateLcs<'a> {
         }
     }
 
+    ///Intellectual Property of Wannes Vantorre. Distribution not permitted.
     fn create_state(source: &'a [u8], target: &'a [u8]) -> Vec<usize> {
         let source_len = source.len();
         let target_len = target.len();
@@ -39,6 +42,7 @@ impl<'a> IncreasingStateLcs<'a> {
 impl Lcs for IncreasingStateLcs<'_> {
     type Item = u8;
 
+    ///Intellectual Property of Wannes Vantorre. Distribution not permitted.
     fn subsequence(&self) -> Vec<Self::Item> {
         let mut last = 0;
         let length = self.len();
