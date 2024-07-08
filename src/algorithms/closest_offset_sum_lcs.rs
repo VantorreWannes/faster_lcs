@@ -55,3 +55,8 @@ impl<'a> Lcs for ClosestOffsetSumLcs<'a> {
         lcs
     }
 }
+
+#[cfg(test)]
+mod closest_offset_sum_lcs_tests {
+
+}

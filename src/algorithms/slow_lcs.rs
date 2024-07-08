@@ -9,7 +9,6 @@ pub struct SlowLcs<'a> {
 }
 
 impl<'a> SlowLcs<'a> {
-    ///Max length for Source and target is `u8::MAX`!
     pub fn new(source: &'a [u8], target: &'a [u8]) -> Self {
         let source_length = source.len();
         let target_length = target.len();
