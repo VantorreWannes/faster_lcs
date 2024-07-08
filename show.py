@@ -42,3 +42,4 @@ if __name__ == "__main__":
     LCS = main(SOURCE, TARGET)
     print(LCS)
     print(len(LCS))
+    

@@ -1,2 +1,6 @@
 .zig-cache
 .explain.txt
+
+# Added by cargo
+
+/target
