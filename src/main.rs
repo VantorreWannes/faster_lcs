@@ -1,5 +1,6 @@
 pub mod lcs_trait;
-pub mod slow_lcs;
+pub mod algorithms;
+pub mod utility;
 
 fn main() {
     println!("Hello, world!");
