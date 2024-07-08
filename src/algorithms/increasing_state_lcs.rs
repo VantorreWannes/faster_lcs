@@ -26,7 +26,8 @@ impl<'a> IncreasingStateLcs<'a> {
                 if source[source_index] == target[target_index] {
                     current[target_index + 1] = previous[target_index] + 1;
                 } else {
-                    current[target_index + 1] = current[target_index].max(previous[target_index + 1]);
+                    current[target_index + 1] =
+                        current[target_index].max(previous[target_index + 1]);
                 }
             }
             previous = current.clone();
@@ -40,20 +41,24 @@ impl Lcs for IncreasingStateLcs<'_> {
 
     fn subsequence(&self) -> Vec<Self::Item> {
         let mut last = 0;
-        if let Some(length) = self.state.last() {
-            let mut lcs: Vec<Self::Item> = Vec::with_capacity(*length);
-            for (target_item, state_item) in self.target.iter().zip(self.state.iter()) {
-                if *state_item > last {
-                    last = *state_item;
-                    lcs.push(*target_item);
-                }
+        let length = self.len();
+        let mut lcs: Vec<Self::Item> = Vec::with_capacity(length);
+        for (target_item, state_item) in self.target.iter().zip(self.state.iter()) {
+            if *state_item > last {
+                last = *state_item;
+                lcs.push(*target_item);
             }
-            return lcs;
         }
-        vec![]
+        lcs
+    }
+
+    fn len(&self) -> usize
+    where
+        Self: Sized,
+    {
+        *self.state.last().unwrap_or(&0)
     }
 }
-
 
 #[cfg(test)]
 mod increasing_state_lcs_tests {
@@ -61,9 +66,8 @@ mod increasing_state_lcs_tests {
 
     use super::IncreasingStateLcs;
 
-
     #[test]
-    fn subsequence() { 
+    fn subsequence() {
         let source = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         let target = vec![0, 0, 3, 1, 2, 1, 3, 4];
         let lcs = IncreasingStateLcs::new(&source, &target);

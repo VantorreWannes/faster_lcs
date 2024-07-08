@@ -41,7 +41,7 @@ impl<'a> Lcs for SlowLcs<'a> {
     fn subsequence(&self) -> Vec<Self::Item> {
         let mut x = self.source.len();
         let mut y = self.target.len();
-        let mut index = self.table[x][y] as usize;
+        let mut index = self.len();
         let mut subsequence: Vec<u8> = vec![0; index + 1];
 
         while x > 0 && y > 0 {
@@ -59,6 +59,10 @@ impl<'a> Lcs for SlowLcs<'a> {
 
         subsequence.pop();
         subsequence
+    }
+
+    fn len(&self) -> usize {
+        self.table[self.source.len()][self.target.len()]
     }
     
 }

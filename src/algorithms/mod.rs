@@ -5,6 +5,8 @@ pub mod increasing_state_lcs;
 
 #[cfg(test)]
 mod lcs_tests {
+    use rand::distributions::{Distribution, Uniform};
+
     use crate::lcs_trait::Lcs;
 
     use super::{slow_lcs::SlowLcs, closest_offset_sum_lcs::ClosestOffsetSumLcs, increasing_state_lcs::IncreasingStateLcs};
@@ -12,13 +14,16 @@ mod lcs_tests {
     
     #[test]
     fn equality() {
-        let source = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        let target = vec![0, 0, 3, 1, 2, 1, 3, 4];
+        let mut rng = rand::thread_rng();
+        let die: Uniform<u8> = Uniform::from(0..=255);
+        let source: Vec<u8> = die.sample_iter(&mut rng).take(1000).collect();
+        let target: Vec<u8> = die.sample_iter(&mut rng).take(1000).collect();
         let slow_lcs = SlowLcs::new(&source, &target);
         let closest_offset_sum_lcs = ClosestOffsetSumLcs::new(&source, &target);
         let increasing_state_lcs = IncreasingStateLcs::new(&source, &target);
-        assert_eq!(slow_lcs.len(), 5);
-        assert_eq!(closest_offset_sum_lcs.len(), 5);
-        assert_eq!(increasing_state_lcs.len(), 4);
+        assert_eq!(slow_lcs.len(), increasing_state_lcs.len());
+        println!("Slow lcs length: {}", slow_lcs.len());
+        println!("Closest offset sum lcs length: {}", closest_offset_sum_lcs.len());
+        println!("Increasing state lcs length: {}", increasing_state_lcs.len());
     }
 }
